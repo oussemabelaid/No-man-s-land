@@ -1,0 +1,25 @@
+#ifndef JEU_H_INCLUDED
+#define JEU_H_INCLUDED
+
+struct Cercle
+{
+   int x,y;
+   int rayon;
+};
+
+typedef struct 
+{
+SDL_Rect positionentite ; 
+int val1; 
+int val2;
+
+SDL_Surface *entite[4]; 
+} entite ;
+
+void init_entite(entite *p1,entite *p2);
+int affichage (char pause );
+int clavier (char pause );
+int souri  (char pause  );
+bool Collision(Cercle C1,Cercle C2);
+
+#endif // JEU_H_INCLUDED
