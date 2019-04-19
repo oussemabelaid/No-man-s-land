@@ -1,55 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h> 
-#include <SDL/SDL_ttf.h>
-//#include "initialisation.h"
+#include <SDL/SDL_image.h>
+#include "file.h" 
 
-int main()
+int bounding_box(SDL_Rect Personnage,SDL_Rect Ennemi)
 {
-//initialisation declaration 
-SDL_Init(SDL_INIT_VIDEO);
-
-SDL_Surface *fenetre =NULL;
-SDL_Surface *bg =NULL;
-SDL_Surface *perso=NULL;
-SDL_Rect persopos;
-
-
-
-fenetre=SDL_SetVideoMode(1000,780,32,SDL_HWSURFACE);
-
-
-bg=IMG_Load("bg4.jpg");
-persopos.x=0;
-persopos.y=0;
-SDL_BlitSurface(perso,NULL, fenetre,&persopos);
-SDL_Flip(fenetre);
-
-/*
-
-TTF_Font *police=NULL;
-        perso p1;
-        perso p2; 
-        scrol s;
-        scrol s1;
-        vie v1;
-	vie v2;
-	score sc1;
-	score sc2;
-	enemie e1;
-	enemie e2;
-	Text T;
-	int t;
-	 SDL_Event event;
-        int gameover = 1;
-        int test=0,test2=0;
-
-*/
-SDL_FreeSurface(perso);
-SDL_FreeSurface(bg);
-SDL_FreeSurface(fenetre);
-SDL_Quit();
-return 0;
-
-}
+if((Personnage.x<Ennemi.x)&&((Personnage.x+Personnage.w)>=Ennemi.x)&&(Personnage.y<=(Ennemi.y+Ennemi.h))&&((Personnage.y+Personnage.h)>=Ennemi.y))
+return 2;
+if(((Personnage.x+Personnage.w)>=Ennemi.x)&&(Personnage.x<=(Ennemi.x+Ennemi.w))&&(Personnage.y>Ennemi.y)&&(Personnage.y<=(Ennemi.y+Ennemi.h)))
+return 1;
+if((Personnage.x>Ennemi.x)&&(Personnage.x<=(Ennemi.x+Ennemi.w))&&(Personnage.y<=(Ennemi.y+Ennemi.h))&&((Personnage.y+Personnage.h)>=Ennemi.y))
+return 4;
+if((Personnage.y<Ennemi.y)&&((Personnage.y+Personnage.h)>=Ennemi.y)&&((Personnage.x+Personnage.w)>=Ennemi.x)&&(Personnage.x<=(Ennemi.x+Ennemi.w)))
+return 3;
+else 
+return 0;}
