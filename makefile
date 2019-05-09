@@ -1,18 +1,10 @@
-game:timetest.o  vie.o clock.o score.o
-	gcc timetest.o   vie.o  clock.o score.o -o game  -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf  -lm -g 
-
-
-vie.o:vie.c
-	gcc vie.c -c  -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -lm  -g
-
-timetest.o:timetest.c
-	gcc timetest.c -c  -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf  -lm  -g
-
-
-clock.o:clock.c
-	gcc clock.c -c  -lSDL -lSDL_image  -lSDL_ttf -lSDL_mixer -lSDL_ttf  -lm  -g
-
-
-
-score.o:score.c
-	gcc score.c -c  -lSDL -lSDL_image  -lSDL_ttf -lSDL_mixer -lSDL_ttf  -lm  -g
+prog:background.o personnage.o math.o main.o
+	gcc background.o personnage.o math.o main.o -o prog -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
+main.o:main.c
+	gcc -c main.c -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
+background.o:background.c
+	gcc -c background.c -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
+personnage.o:personnage.c
+	gcc -c personnage.c -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g
+math.o:math.c
+	gcc -c math.c -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf -g

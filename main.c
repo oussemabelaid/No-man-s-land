@@ -1,54 +1,42 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "SDL/SDL.h"
-#include "objet .h"
+#include <stdio.h>
+#include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include "math.h"
+#include "personnage.h"
+#include "background.h"
 
-int main(void){
-
-SDL_Surface *screen;
-SDL_Surface *image;
-
-objet o1;
-objet o2;
-char pause;
-SDL_Rect positionscreen;
-SDL_Event event;
-SDL_Init(SDL_INIT_VIDEO);
-screen=SDL_SetVideoMode(800,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
-
-
-image =IMG_Load("bg.png");
-
-positionscreen.x=0;
-positionscreen.y=0;
-
-init_objet (&o1,0,100,"o1.png");
-init_objet (&o2,320,100,"o2.png");
-
-int done =1 ;
-while (done)
+int main(int argc,char** argv)
 {
-SDL_BlitSurface(image,NULL,screen,&positionscreen);
-afficher_objet(o1,screen);
-afficher_objet(o2,screen);
-while(SDL_PollEvent(&event))
-{
-switch(event.type)
-{
-case SDL_QUIT:
-done= 0;
-break;
-}
-SDL_Flip(screen);
-}
-SDL_Flip(screen);
-}
-SDL_FreeSurface(image);
+    SDL_Surface* screen;
+background b;
+    int numkeys;
+    Uint8 * keys;
+    Sprite S;
+    Uint32 timer,elapsed;
 
+    SDL_Init(SDL_INIT_VIDEO);
+    screen=SDL_SetVideoMode(600,320,32,SDL_SWSURFACE|SDL_DOUBLEBUF);
+initialiserback(&b);
+ initialiser_perso(&S);
+    do 
+    {
+        timer = SDL_GetTicks();
+        SDL_FillRect(screen,NULL,0);
+        SDL_PumpEvents();
+        keys = SDL_GetKeyState(&numkeys);
+        Evolue(&S,keys);
 
-DL_Quit();
-return EXIT_SUCCESS;
-pause= getchar();
-return 0;}
+afficherback(b,screen);
+afficherperso(S,screen);
+//        Render(&S,screen);
+        SDL_Flip(screen);
+        elapsed = SDL_GetTicks() - timer;
+        if (elapsed<20)
+            SDL_Delay(20-elapsed);
+    } while (!keys[SDLK_ESCAPE]);
+    SDL_Quit();
+    return 0;
+}
 
