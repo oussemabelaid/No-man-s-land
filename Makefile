@@ -1,8 +1,10 @@
-prog:enigme.o main.o
-	gcc enigme.o main.o -lSDL -lSDL_image -lSDL_ttf -o prog
-
+prog:main.o work.o
+	gcc main.o work.o -o prog -lSDL -lSDL_image -lSDL_ttf -g
 main.o:main.c
-	gcc -c -lSDL -lSDL_image -lSDL_ttf main.c
-
-enigme.o:enigme.c
-	gcc -c -lSDL -lSDL_image -lSDL_ttf enigme.c
+	gcc -c main.c -g
+text.o:text.c
+	gcc -c work.c -g
+clean:
+	rm -fr *.o
+mrproper:clean
+	rm -f prog
