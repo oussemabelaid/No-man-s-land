@@ -97,11 +97,11 @@ reponse=0;
 break;}
 //generation&affichage
 if(random==1){
-question=TTF_RenderText_Shaded(fonttexte,"ln(2x)−ln(x) pour x>0 =ln(x)?",couleurtexte,couleur);}
+question=TTF_RenderText_Shaded(fonttexte,"la capitale de SÉNÉGAL  est DOUARNEZ	?",couleurtexte,couleur);}
 else if(random==2){
-question=TTF_RenderText_Shaded(fonttexte,"ln((x*x)−1)−ln(x−1) pour x>1 =ln(x+1)?",couleurtexte,couleur);}
+question=TTF_RenderText_Shaded(fonttexte,"la capitale de l'argentine est buenos aires?",couleurtexte,couleur);}
 else if(random==3){
-question=TTF_RenderText_Shaded(fonttexte,"2*ln(x)-ln(3x)=2*(ln(1/3))?",couleurtexte,couleur);}
+question=TTF_RenderText_Shaded(fonttexte,"la capitale l'AUSTRALIE est strasbourg?",couleurtexte,couleur);}
 	SDL_BlitSurface(question, NULL,screen,&posquestion); 
 if(random==1){
 
