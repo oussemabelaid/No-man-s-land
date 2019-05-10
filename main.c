@@ -1,33 +1,33 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "acceleration.h"
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include "work.h"
-int main()
-{
-char pause;
-ecran e;
-perso p;
-int done=1;
-p.continuer = 1;
-SDL_Init(SDL_INIT_EVERYTHING);
 
 
-
-SDL_EnableKeyRepeat(30,30);
-init_positions(&e,&p);
-while(done)
+int main ( int argc, char** argv )
 {
 
-init_affich(&e,&p);
-key_event (&p,&e);
-SDL_Flip(e.e);
+	SDL_Surface *screen;
+	// initialize SDL video
+	if ( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
+		printf( "Unable to init SDL: %s\n", SDL_GetError() );
+		return 1;
+	}
+
+	// make sure SDL cleans up before exit
+	atexit(SDL_Quit);
+
+	// create a new window
+	screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, 32,SDL_HWSURFACE|SDL_DOUBLEBUF | SDL_SRCALPHA);
+
+	if ( !screen ) {
+		printf("Unable to set 600x300 video: %s\n", SDL_GetError());
+		return 1;
+	}
+
+
+	jouer(screen);
+
+
+	// all is well ;)
+	printf("Exited cleanly\n");
+	return 0;
 }
-
-SDL_Quit();
-return 0 ;
-}
-
-
-
